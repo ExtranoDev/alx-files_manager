@@ -28,6 +28,13 @@ class DBClient {
     const fileNum = await this.files.countDocuments();
     return fileNum;
   }
+
+  async saveUser(email, passwd) {
+    this.db = this.client.db();
+    this.users = this.db.collection('users');
+    const user = await this.users.insert(email, password: passwd);
+    return user;
+  }
 }
 
 const dbClient = new DBClient();
