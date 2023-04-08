@@ -10,8 +10,8 @@ class UsersController {
     } else if (!password) {
       res.status(400).json({ error: 'Missing password' });
     } else {
-      const user = await dbClient.findUser(email);
-      if (user) res.status().json({ error: 'Already exist' });
+      const user = await dbClient.searchUser(email);
+      if (user) res.status(400).json({ error: 'Already exist' });
       else {
         const passwd = sha1(passwd);
         const user = await dbClient.saveUser(email, passwd);
@@ -20,3 +20,5 @@ class UsersController {
     }
   }
 }
+
+export default UsersController;

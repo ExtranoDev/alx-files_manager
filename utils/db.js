@@ -32,7 +32,14 @@ class DBClient {
   async saveUser(email, passwd) {
     this.db = this.client.db();
     this.users = this.db.collection('users');
-    const user = await this.users.insert(email, password: passwd);
+    const user = await this.users.insert(email, passwd);
+    return user;
+  }
+
+  async searchUser(email) {
+    this.db = this.client.db();
+    this.users = this.db.collection('users');
+    const user = await this.users.find(email);
     return user;
   }
 }
