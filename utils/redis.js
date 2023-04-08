@@ -8,11 +8,8 @@ class RedisClient {
     this.client.on('error', (err) => console.log(err));
   }
 
-  async isAlive() {
-    this.client.on('ready', (err) => {
-      if (err) return false;
-      return true;
-    });
+  isAlive() {
+    return this.client.connected;
   }
 
   async get(key) {
